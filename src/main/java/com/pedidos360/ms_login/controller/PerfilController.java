@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+// Controlador REST de perfil de usuario e integración de claims JWT - Pedidos360 (v1.1.0)
 @RestController
 @RequestMapping("/api/profile")
 public class PerfilController {
