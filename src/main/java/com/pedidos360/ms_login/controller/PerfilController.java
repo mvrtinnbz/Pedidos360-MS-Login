@@ -4,10 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 // Controlador REST de perfil de usuario e integración de claims JWT - Pedidos360 (v1.1.0)
 @RestController
 @RequestMapping("/api/profile")
@@ -24,18 +20,15 @@ public class PerfilController {
             if (email == null) {
                 email = jwt.getClaimAsString("email");
             }
-            List<String> roles = jwt.getClaimAsStringList("roles");
-
+        
             response.put("nombre", nombre != null ? nombre : "Usuario Autenticado");
             response.put("email", email != null ? email : jwt.getSubject());
-            response.put("roles", roles != null ? roles : List.of("USER"));
             response.put("aud", jwt.getAudience());
             response.put("iss", jwt.getIssuer() != null ? jwt.getIssuer().toString() : null);
         } else {
             // Respuesta de prueba / desarrollo local (cuando se prueba sin token en Postman)
             response.put("nombre", "Martín Baza");
             response.put("email", "martin.baza@pedidos360.com");
-            response.put("roles", List.of("USER"));
             response.put("modo", "Desarrollo Local (Sin Token JWT)");
         }
 
