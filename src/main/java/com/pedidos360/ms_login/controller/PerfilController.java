@@ -4,6 +4,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 // Controlador REST de perfil de usuario e integración de claims JWT - Pedidos360 (v1.1.0)
 @RestController
 @RequestMapping("/api/profile")
@@ -20,7 +24,7 @@ public class PerfilController {
             if (email == null) {
                 email = jwt.getClaimAsString("email");
             }
-        
+
             response.put("nombre", nombre != null ? nombre : "Usuario Autenticado");
             response.put("email", email != null ? email : jwt.getSubject());
             response.put("aud", jwt.getAudience());
